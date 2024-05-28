@@ -20,8 +20,8 @@
                 </form>
 
                 <ul class="navbar-nav mb-2 mb-lg-0">
-                    <li class="nav-item ">
-                        <a class="nav-link active text-white btn btn-outline-success" aria-current="page" href="#">{{ Auth::user()->name }}</a>
+                    <li class="nav-item mx-2">
+                        <a class="text-white btn btn-outline-info" aria-current="page" href="#">{{ Auth::user()->name }}</a>
                     </li>
                     <li class="nav-item">
                         <form action="{{ route('logout') }}" method="POST">
