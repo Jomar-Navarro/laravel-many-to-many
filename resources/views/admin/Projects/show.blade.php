@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="container my-3 p-5 bg-dark-subtle rounded-5">
+<div class="container h-100 my-3 p-5 bg-dark-subtle rounded-5 overflow-auto">
     <h1 class="text-center fw-bold">{{ $project->title }}</h1>
 
     <h4>Technology: <span class="badge text-bg-success">{{ $project->technology?->title }}</span></h4>
@@ -15,21 +15,27 @@
         </p>
     @endif
 
-    <div class="row my-3 d-flex">
-        <div class="col col-4">
-            <img class="object-fit-contain img-fluid" src="{{ $project->image }}" alt="{{ $project->title }}">
+    <div class="row h-auto my-3 d-flex">
+        <div class="col col-5">
+            <img class="object-fit-contain img-fluid" src="/img/imagenotfound.jpg" alt="{{ $project->title }}">
         </div>
 
-        <div class="col col-8 text-start text-black">
-            <h2 class="fw-bolder">{{ $project->title }}</h2>
-            <p>Completion Date: {{ $project->completion_date }}</p>
-            <p class="fw-bold">Git-hub: {{ $project->project_url }}</p>
-            <p>Description: {{ $project->description }}</p>
-            <button class="btn btn-secondary w-25"><a class="link-body-emphasis" href="{{ route('admin.projects.index') }}"><i class="fa-solid fa-person-walking-arrow-loop-left"></i></a></button>
-            <a class="btn btn-warning" href="{{ route('admin.projects.edit', $project->id)  }}"><i class="fa-solid fa-pen-nib"></i></a>
-            <a class="btn btn-danger" href="{{ route('admin.projects.destroy', $project->id)  }}"><i class="fa-solid fa-trash-can"></i></a>
+        <div class="col col-7 text-start text-black d-flex justify-content-between flex-column">
+            <div>
+                <h2 class="fw-bolder">{{ $project->title }}</h2>
+                <p>Completion Date: {{ $project->completion_date }}</p>
+                <p class="fw-bold">Git-hub: {{ $project->project_url }}</p>
+            </div>
+            <div>
+                <a class="btn btn-secondary" href="{{ route('admin.projects.index') }}"><i class="fa-solid fa-person-walking-arrow-loop-left"></i></a>
+                <a class="btn btn-warning text-white" href="{{ route('admin.projects.edit', $project->id)  }}"><i class="fa-solid fa-pen-nib"></i></a>
+                <a class="btn btn-danger" href="{{ route('admin.projects.destroy', $project->id)  }}"><i class="fa-solid fa-trash-can"></i></a>
+            </div>
         </div>
 
+        <div class="overflow-y-scroll">
+            <p class="mt-3 ">Description: lorem3000</p>
+        </div>
     </div>
 </div>
 

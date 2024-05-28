@@ -26,21 +26,19 @@
     @endif
 
 
-  <div class="container-fluid">
-    <form class="d-flex" action="{{ route('admin.types.store') }}" method="POST">
+    <form class="d-flex w-25" action="{{ route('admin.types.store') }}" method="POST">
         @csrf
         <input class="form-control me-2" type="search" placeholder="New Technology" name="title">
         <button class="btn btn-success" type="submit">Submit</button>
     </form>
-  </div>
 
-    <table class="table">
-  <thead>
-    <tr>
-      <th scope="col">Technologies</th>
-      <th scope="col">Action</th>
-    </tr>
-  </thead>
+    <table class="table my-3">
+    <thead>
+        <tr>
+          <th scope="col">Technologies</th>
+          <th scope="col">Action</th>
+        </tr>
+    </thead>
   <tbody>
     @foreach ($types as $type)
     <tr>
