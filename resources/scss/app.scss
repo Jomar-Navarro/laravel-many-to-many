@@ -1,0 +1,48 @@
+@import "~bootstrap/scss/bootstrap";
+
+header {
+    height: 70px;
+}
+
+.main-wrapper {
+    height: calc(100vh - 70px);
+    .content {
+        width: 100%;
+    }
+}
+
+aside {
+    width: 12%;
+    ul {
+        list-style: none;
+        li {
+            margin: 10px 0 10px 0;
+            a {
+                text-decoration: none;
+                color: white;
+            }
+            span {
+                padding-left: 5px;
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+}
+
+.table {
+    td:first-child {
+        width: 350px;
+    }
+
+    input {
+        border: none;
+        outline: none;
+    }
+}
+
+.thumb {
+    width: 250px;
+    margin: 0px 20px;
+}
