@@ -75,6 +75,21 @@
             </select>
         </div>
 
+        <div class="mb-3 m-3">
+            <label class="form-label fw-bold">Type: </label>
+            <div class="btn-group btn-group-sm" role="group">
+                @foreach ($types as $item)
+                    <input
+                      type="checkbox"
+                      class="btn-check"
+                      id="tag_{{ $item->id }}"
+                      autocomplete="off"
+                      value="{{ $item->id }}">
+                    <label class="btn btn-outline-primary" for="tag_{{ $item->id }}">{{ $item->title }}</label>
+                @endforeach
+            </div>
+        </div>
+
         <div class="row">
             <div class="col">
                 <div class="mb-3 m-3">
@@ -116,21 +131,6 @@
                     @enderror
                 </div>
             </div>
-        </div>
-
-        <div class="row">
-            <div class="col">
-                <div class="mb-3 m-3">
-                    <label for="rating_reviews" class="form-label fw-bold">Rating Reviews</label>
-                    <input
-                      name="rating_reviews"
-                      type="text"
-                      class="form-control"
-                      id="rating_reviews"
-                      value="{{ old('rating_reviews') }}">
-                </div>
-            </div>
-
         </div>
 
         <div class="mb-3 m-3">

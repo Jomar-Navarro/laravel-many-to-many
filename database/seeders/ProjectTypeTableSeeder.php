@@ -14,6 +14,12 @@ class ProjectTypeTableSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        for($i = 0; $i < 20; $i++){
+            $project = Project::inRandomOrder()->first();
+
+            $type_id = Type::inRandomOrder()->first()->id;
+
+            $project->types()->attach($type_id);
+        }
     }
 }

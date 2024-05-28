@@ -9,6 +9,7 @@
         <tr>
             <th scope="col">Title</th>
             <th scope="col">Technology</th>
+            <th scope="col">Type</th>
             <th scope="col">Description</th>
             <th scope="col">Project Url</th>
             <th scope="col">Image</th>
@@ -20,6 +21,13 @@
         <tr>
             <td>{{ $project->title }}</td>
             <td>{{ $project->technology?->title }}</td>
+            <td>
+                @forelse ($project->types as $type)
+                <span class="badge text-bg-info">{{ $type->title }}</span>
+                @empty
+                    ~ No Types ~
+                @endforelse
+            </td>
             <td>{{ $project->description }}</td>
             <td><a href="{{ $project->project_url }}" target="_blank">{{ $project->project_url }}</a></td>
             <td><img src="{{ asset($project->image) }}" alt=""></td>

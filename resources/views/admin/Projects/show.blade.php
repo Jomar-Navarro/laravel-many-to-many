@@ -5,7 +5,15 @@
 <div class="container my-3 p-5 bg-dark-subtle rounded-5">
     <h1 class="text-center fw-bold">{{ $project->title }}</h1>
 
-    <p>Technology: <span class="badge text-bg-success">{{ $project->technology?->title }}</span></p>
+    <h4>Technology: <span class="badge text-bg-success">{{ $project->technology?->title }}</span></h4>
+
+    @if ($project->types)
+        <p>Type:
+                @foreach ($project->types as $type)
+                <span class="badge text-bg-info">{{ $type->title }}</span>
+                @endforeach ()
+        </p>
+    @endif
 
     <div class="row my-3 d-flex">
         <div class="col col-4">

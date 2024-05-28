@@ -8,6 +8,7 @@ use App\Models\Project;
 use App\Functions\Helper as Help;
 use App\Http\Requests\ProjectRequest;
 use App\Models\Technology;
+use App\Models\Type;
 
 class ProjectController extends Controller
 {
@@ -32,8 +33,9 @@ class ProjectController extends Controller
     {
         $technology = Technology::all();
 
+        $types = Type::all();
 
-        return view('admin.Projects.create', compact('technology'));
+        return view('admin.Projects.create', compact('technology', 'types'));
     }
 
     /**
