@@ -44,11 +44,19 @@ class ProjectController extends Controller
     public function store(ProjectRequest $request)
     {
         $form_data = $request->all();
+
+
+
         $form_data['slug'] = Help::generateSlug($form_data['title'], Project::class);
 
         $new = new Project();
         $new->fill($form_data);
         $new->save();
+
+
+        if(array_key_exists('types', $form_data)){
+            $new->types()->attach($form_data['types']);
+        }
 
         return redirect()->route('admin.projects.show', $new);
     }
@@ -68,41 +76,51 @@ class ProjectController extends Controller
     public function edit(Project $project)
     {
         $technology = Technology::all();
+        $types = Type::all();
 
-        return view('admin.Projects.edit', compact('project', 'technology'));
+        return view('admin.Projects.edit', compact('project', 'technology', 'types'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Project $project)
+    public function update(ProjectRequest $request, Project $project)
     {
-        $val_data = $request->validate([
-            'title' => 'required|min:2|max:20',
-            // 'description' => 'required',
-            // 'project_url' => 'required|url',
-            // 'completion_date' => 'required|date',
-        ],
-        [
-            'title.required' => 'Name of the project is required.',
-            'title.min' => 'The project name should have at least 2 characters.',
-            'title.max' => 'The project name should have a maximum of 20 characters.',
-            // 'description.required' => 'Description is required.',
-            // 'project_url.required' => 'Project URL is required.',
-            // 'project_url.url' => 'Project URL should be a valid URL.',
-            // 'completion_date.required' => 'Completion date is required.',
-            // 'completion_date.date' => 'Completion date should be a valid date.',
-        ]);
+        $form_data = $request->all();
 
-        $exist = Project::where('title', $request->title)->first();
-        if ($exist) {
-            return redirect()->route('admin.projects.index')->with('error', 'Project already exist!');
+        // $val_data = $request->validate([
+        //     'title' => 'required|min:2|max:20',
+        //     // 'description' => 'required',
+        //     // 'project_url' => 'required|url',
+        //     // 'completion_date' => 'required|date',
+        // ],
+        // [
+        //     'title.required' => 'Name of the project is required.',
+        //     'title.min' => 'The project name should have at least 2 characters.',
+        //     'title.max' => 'The project name should have a maximum of 20 characters.',
+        //     // 'description.required' => 'Description is required.',
+        //     // 'project_url.required' => 'Project URL is required.',
+        //     // 'project_url.url' => 'Project URL should be a valid URL.',
+        //     // 'completion_date.required' => 'Completion date is required.',
+        //     // 'completion_date.date' => 'Completion date should be a valid date.',
+        // ]);
+
+        if ($form_data['title'] !== $project->title) {
+            $form_data['slug'] = Help::generateSlug($request->title, Project::class);
         }else {
-            $val_data['slug'] = Help::generateSlug($request->title, Project::class);
-            $project->update($val_data);
-
-            return redirect()->route('admin.projects.index')->with('success', 'Project modified successfully!');
+            $form_data['slug'] = $project->slug;
         }
+
+        $project->update($form_data);
+
+        if(array_key_exists('types', $form_data)){
+            $project->types()->sync($form_data['types']);
+        }else{
+            $project->types()->detach();
+        }
+
+
+        return redirect()->route('admin.projects.show', $project)->with('success', 'Project modified successfully!');
     }
 
     /**

@@ -15,9 +15,9 @@
         </div>
     @endif
 
-    <form action="{{ route('admin.projects.store') }}" method="POST">
+    <form action="{{ route('admin.projects.update', $project->id) }}" method="POST">
         @csrf
-
+        @method('PUT')
         <div class="row">
             <div class="col col-6">
                 <div class="mb-3 m-3">
@@ -75,6 +75,26 @@
             </select>
         </div>
 
+         <div class="mb-3 m-3">
+            <label class="form-label fw-bold">Type: </label>
+            <div class="btn-group btn-group-sm" role="group">
+                @foreach ($types as $item)
+                    <input
+                      name="types[]"
+                      type="checkbox"
+                      class="btn-check"
+                      id="tag_{{ $item->id }}"
+                      autocomplete="off"
+                      value="{{ $item->id }}"
+                      @if ($errors->any() && in_array($item->id, old('types', []))
+                            || !$errors->any() && $project->types->contains($item))
+                          checked
+                      @endif>
+                    <label class="btn btn-outline-primary" for="tag_{{ $item->id }}">{{ $item->title }}</label>
+                @endforeach
+            </div>
+        </div>
+
         <div class="row">
             <div class="col">
                 <div class="mb-3 m-3">
@@ -120,15 +140,7 @@
 
         <div class="mb-3 m-3">
             <label for="description" class="form-label fw-bold">Description</label>
-            <textarea
-              name="description"
-              type="text"
-              class="form-control"
-              @error('location')
-                    is-invalid
-                @enderror
-              id="description"
-              value="{{ old('description', $project->description) }}">
+            <textarea name="description" class="form-control" @error('description') is-invalid @enderror id="description">
               {{ old('description', $project->description) }}
             </textarea>
 

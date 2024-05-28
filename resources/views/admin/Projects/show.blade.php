@@ -7,7 +7,7 @@
 
     <h4>Technology: <span class="badge text-bg-success">{{ $project->technology?->title }}</span></h4>
 
-    @if ($project->types)
+    @if (count($project->types) > 0)
         <p>Type:
                 @foreach ($project->types as $type)
                 <span class="badge text-bg-info">{{ $type->title }}</span>

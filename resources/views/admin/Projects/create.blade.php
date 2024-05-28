@@ -80,11 +80,15 @@
             <div class="btn-group btn-group-sm" role="group">
                 @foreach ($types as $item)
                     <input
+                      name="types[]"
                       type="checkbox"
                       class="btn-check"
                       id="tag_{{ $item->id }}"
                       autocomplete="off"
-                      value="{{ $item->id }}">
+                      value="{{ $item->id }}"
+                      @if (in_array($item->id, old('types', [])))
+                          checked
+                      @endif>
                     <label class="btn btn-outline-primary" for="tag_{{ $item->id }}">{{ $item->title }}</label>
                 @endforeach
             </div>
