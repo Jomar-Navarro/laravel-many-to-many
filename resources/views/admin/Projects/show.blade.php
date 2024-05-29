@@ -17,7 +17,7 @@
 
     <div class="row h-auto my-3 d-flex">
         <div class="col col-5">
-            <img class="object-fit-contain img-fluid" src="/img/imagenotfound.jpg" alt="{{ $project->title }}">
+            <img class="object-fit-contain img-fluid" src="{{ asset('storage/' . $project->image) }}" alt="{{ $project->title }}">
         </div>
 
         <div class="col col-7 text-start text-black d-flex justify-content-between flex-column">

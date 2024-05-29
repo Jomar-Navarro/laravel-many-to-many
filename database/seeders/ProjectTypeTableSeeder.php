@@ -17,9 +17,13 @@ class ProjectTypeTableSeeder extends Seeder
         for($i = 0; $i < 20; $i++){
             $project = Project::inRandomOrder()->first();
 
-            $type_id = Type::inRandomOrder()->first()->id;
+            $type_id = Type::inRandomOrder()->first();
 
-            $project->types()->attach($type_id);
+            // $project->types()->attach($type_id);
+
+            if ($project && $type_id) {
+                $project->types()->attach($type_id->id);
+            }
         }
     }
 }

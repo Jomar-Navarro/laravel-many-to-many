@@ -9,6 +9,8 @@ use App\Functions\Helper as Help;
 use App\Http\Requests\ProjectRequest;
 use App\Models\Technology;
 use App\Models\Type;
+use Illuminate\Support\Facades\Storage;
+
 
 class ProjectController extends Controller
 {
@@ -45,6 +47,12 @@ class ProjectController extends Controller
     {
         $form_data = $request->all();
 
+        if(array_key_exists('image', $form_data)){
+            $image_path = Storage::put('uploads', $form_data['image']);
+            $original_name = $request->file('image')->getClientOriginalName();
+            $form_data['image'] = $image_path;
+            $form_data['image_original_name'] = $original_name;
+        }
 
 
         $form_data['slug'] = Help::generateSlug($form_data['title'], Project::class);
@@ -88,22 +96,21 @@ class ProjectController extends Controller
     {
         $form_data = $request->all();
 
-        // $val_data = $request->validate([
-        //     'title' => 'required|min:2|max:20',
-        //     // 'description' => 'required',
-        //     // 'project_url' => 'required|url',
-        //     // 'completion_date' => 'required|date',
-        // ],
-        // [
-        //     'title.required' => 'Name of the project is required.',
-        //     'title.min' => 'The project name should have at least 2 characters.',
-        //     'title.max' => 'The project name should have a maximum of 20 characters.',
-        //     // 'description.required' => 'Description is required.',
-        //     // 'project_url.required' => 'Project URL is required.',
-        //     // 'project_url.url' => 'Project URL should be a valid URL.',
-        //     // 'completion_date.required' => 'Completion date is required.',
-        //     // 'completion_date.date' => 'Completion date should be a valid date.',
-        // ]);
+
+        if($form_data['title'] !== $project->title){
+
+            $form_data['slug'] = Help::generateSlug($form_data['title'], Project::class);
+
+        }else{
+            $form_data['slug'] = $project->slug;
+        }
+
+        if(array_key_exists('image', $form_data)){
+            $image_path = Storage::put('uploads', $form_data['image']);
+            $original_name = $request->file('image')->getClientOriginalName();
+            $form_data['image'] = $image_path;
+            $form_data['image_original_name'] = $original_name;
+        }
 
         if ($form_data['title'] !== $project->title) {
             $form_data['slug'] = Help::generateSlug($request->title, Project::class);

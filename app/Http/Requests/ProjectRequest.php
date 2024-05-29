@@ -36,9 +36,9 @@ class ProjectRequest extends FormRequest
             'title.max' => 'The project title can\'t have more 255 character.',
             'description.required' => 'The project description is required',
             'project_url.url' => 'L\'URL del progetto deve essere un URL valido.',
-            'image.image' => 'L\'immagine deve essere un file immagine.',
-            'image.mimes' => 'L\'immagine deve essere di uno dei seguenti formati: jpeg, png, jpg, gif.',
-            'image.max' => 'L\'immagine non può superare i 2 MB di dimensioni.',
+            // 'image.image' => 'L\'immagine deve essere un file immagine.',
+            // 'image.mimes' => 'L\'immagine deve essere di uno dei seguenti formati: jpeg, png, jpg, gif.',
+            // 'image.max' => 'L\'immagine non può superare i 2 MB di dimensioni.',
         ];
     }
 }

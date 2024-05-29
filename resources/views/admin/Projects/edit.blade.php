@@ -15,7 +15,7 @@
         </div>
     @endif
 
-    <form action="{{ route('admin.projects.update', $project->id) }}" method="POST">
+    <form action="{{ route('admin.projects.update', $project->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
         <div class="row">
@@ -59,7 +59,7 @@
                         </small>
                     @enderror
                 </div>
-                <img class="thumb" id="thumb" src="/img/imagenotfound.jpg" alt="imagenotfound">
+                <img class="thumb" id="thumb" src="{{ asset('storage/' . $project->image) }}" alt="imagenotfound" onerror="this.src='/img/imagenotfound.jpg'">
             </div>
         </div>
 

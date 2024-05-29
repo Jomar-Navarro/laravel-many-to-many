@@ -11,7 +11,7 @@ class DashboardController extends Controller
     public function index(){
 
         $count = Project::count();
-        $last_project = Project::orderBy('id', 'desc')->first();
+        $last_project = Project::orderBy('created_at', 'desc')->first();
 
         return view('admin.home', compact('count', 'last_project'));
     }

@@ -8,8 +8,12 @@
         <h1>Sono presenti {{ $count }} progetti.</h1>
 
         <h3>Last Project</h3>
-        <p>{{ $last_project->title }}</p>
-        <p>{{ $last_project->description }}</p>
+        @if ($last_project)
+            <p>{{ $last_project->title }}</p>
+            <p>{{ $last_project->description }}</p>
+        @else
+        <p>Non ci sono progetti.</p>
+        @endif
     </div>
 
 @endsection

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('project_url')->nullable();
             $table->date('completion_date')->nullable();
             $table->string('image')->nullable();
+            $table->string('image_original_name')->nullable();
             $table->timestamps();
         });
     }

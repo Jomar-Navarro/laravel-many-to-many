@@ -15,13 +15,13 @@
         </div>
     @endif
 
-    <form action="{{ route('admin.projects.store') }}" method="POST">
+    <form action="{{ route('admin.projects.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
 
         <div class="row">
             <div class="col col-6">
                 <div class="mb-3 m-3">
-                    <label for="title" class="form-label  fw-bold">Title</label>
+                    <label for="title" class="form-label  fw-bold">Title (*)</label>
                     <input
                         name="title"
                         type="text"

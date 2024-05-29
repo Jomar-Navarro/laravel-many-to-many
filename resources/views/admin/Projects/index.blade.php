@@ -31,14 +31,16 @@
             <td>{{ $project->description }}</td>
             <td><a href="{{ $project->project_url }}" target="_blank">{{ $project->project_url }}</a></td>
             <td><img src="{{ asset($project->image) }}" alt=""></td>
-            <td class="d-flex">
-                <a href="{{ route('admin.projects.show', $project) }}" class="btn btn-success"><i class="fa-solid fa-eye"></i></a>
-                <a class="btn btn-warning mx-1" href="{{ route('admin.projects.edit', $project->id)  }}"><i class="fa-solid fa-pen-nib"></i></a>
-                <form action="{{ route('admin.projects.destroy', $project) }}" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <button class="btn btn-danger"><i class="fa-solid fa-trash-can"></i></button>
-                </form>
+            <td >
+                <div class="d-flex">
+                    <a href="{{ route('admin.projects.show', $project) }}" class="btn btn-success"><i class="fa-solid fa-eye"></i></a>
+                    <a class="btn btn-warning mx-1" href="{{ route('admin.projects.edit', $project->id)  }}"><i class="fa-solid fa-pen-nib"></i></a>
+                    <form action="{{ route('admin.projects.destroy', $project) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button class="btn btn-danger"><i class="fa-solid fa-trash-can"></i></button>
+                    </form>
+                </div>
             </td>
         </tr>
         @empty
